@@ -34,7 +34,9 @@ Namespace ApiExamples
 		<TestFixtureTearDown> _
 		Public Sub TearDown()
 			'Delete all files from dir
-			Array.ForEach(Directory.GetFiles(dirPath), File.Delete)
+            For Each file In Directory.GetFiles(dirPath)
+                IO.File.Delete(file)
+            Next
 
 			'Delete empty folder
 			Directory.Delete(dirPath)
