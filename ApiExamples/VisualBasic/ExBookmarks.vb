@@ -177,41 +177,41 @@ Namespace ApiExamples
 
 			InsertBookmarks(doc)
 
-			If saveFormat Is SaveFormat.Pdf Then
-				'Save document with pdf save options
-				doc.Save(MyDir & "\Artifacts\Bookmark_WhiteSpaces.pdf", AddBookmarkSaveOptions(SaveFormat.Pdf))
+            If saveFormat = saveFormat.Pdf Then
+                'Save document with pdf save options
+                doc.Save(MyDir & "\Artifacts\Bookmark_WhiteSpaces.pdf", AddBookmarkSaveOptions(saveFormat.Pdf))
 
-				'Bind pdf with Aspose PDF
-				Dim bookmarkEditor As New PdfBookmarkEditor()
-				bookmarkEditor.BindPdf(MyDir & "Bookmark_WhiteSpaces.pdf")
+                'Bind pdf with Aspose PDF
+                Dim bookmarkEditor As New PdfBookmarkEditor()
+                bookmarkEditor.BindPdf(MyDir & "Bookmark_WhiteSpaces.pdf")
 
-				'Get all bookmarks from the document
-				Dim bookmarks As Bookmarks = bookmarkEditor.ExtractBookmarks()
+                'Get all bookmarks from the document
+                Dim bookmarks As Bookmarks = bookmarkEditor.ExtractBookmarks()
 
-				Assert.AreEqual(3, bookmarks.Count)
+                Assert.AreEqual(3, bookmarks.Count)
 
-				'Assert that all the bookmarks title are with witespaces
-				Assert.AreEqual("My Bookmark", bookmarks(0).Title)
-				Assert.AreEqual("Nested Bookmark", bookmarks(1).Title)
+                'Assert that all the bookmarks title are with witespaces
+                Assert.AreEqual("My Bookmark", bookmarks(0).Title)
+                Assert.AreEqual("Nested Bookmark", bookmarks(1).Title)
 
-				'Assert that the bookmark title without witespaces
-				Assert.AreEqual("Bookmark_WithoutWhiteSpaces", bookmarks(2).Title)
-			Else
-				Dim dstStream As New MemoryStream()
-				doc.Save(dstStream, AddBookmarkSaveOptions(saveFormat))
+                'Assert that the bookmark title without witespaces
+                Assert.AreEqual("Bookmark_WithoutWhiteSpaces", bookmarks(2).Title)
+            Else
+                Dim dstStream As New MemoryStream()
+                doc.Save(dstStream, AddBookmarkSaveOptions(saveFormat))
 
-				'Get bookmarks from the document
-				Dim bookmarks As BookmarkCollection = doc.Range.Bookmarks
+                'Get bookmarks from the document
+                Dim bookmarks As BookmarkCollection = doc.Range.Bookmarks
 
-				Assert.AreEqual(3, bookmarks.Count)
+                Assert.AreEqual(3, bookmarks.Count)
 
-				'Assert that all the bookmarks title are with witespaces
-				Assert.AreEqual("My Bookmark", bookmarks(0).Name)
-				Assert.AreEqual("Nested Bookmark", bookmarks(1).Name)
+                'Assert that all the bookmarks title are with witespaces
+                Assert.AreEqual("My Bookmark", bookmarks(0).Name)
+                Assert.AreEqual("Nested Bookmark", bookmarks(1).Name)
 
-				'Assert that the bookmark title without witespaces
-				Assert.AreEqual("Bookmark_WithoutWhiteSpaces", bookmarks(2).Name)
-			End If
+                'Assert that the bookmark title without witespaces
+                Assert.AreEqual("Bookmark_WithoutWhiteSpaces", bookmarks(2).Name)
+            End If
 		End Sub
 
 		Private Shared Sub InsertBookmarks(ByVal doc As Document)

@@ -944,13 +944,13 @@ Namespace ApiExamples
 			''' potential issue during document procssing. The callback can be set to listen for warnings generated during document
 			''' load and/or document save.
 			''' </summary>
-			Public Sub Warning(ByVal info As WarningInfo)
-				' We are only interested in fonts being substituted.
-				If info.WarningType = WarningType.FontSubstitution Then
-					Console.WriteLine("Font substitution: " & info.Description)
-					Me.mFontWarnings.Warning(info) 'ExSkip
-				End If
-			End Sub
+            Public Sub Warning(ByVal info As WarningInfo) Implements IWarningCallback.Warning
+                ' We are only interested in fonts being substituted.
+                If info.WarningType = WarningType.FontSubstitution Then
+                    Console.WriteLine("Font substitution: " & info.Description)
+                    Me.mFontWarnings.Warning(info) 'ExSkip
+                End If
+            End Sub
 
 			Public mFontWarnings As New WarningInfoCollection() 'ExSkip
 		End Class

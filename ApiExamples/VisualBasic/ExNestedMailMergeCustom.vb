@@ -169,58 +169,58 @@ Namespace ApiExamples
 			''' <summary>
 			''' The name of the data source. Used by Aspose.Words only when executing mail merge with repeatable regions.
 			''' </summary>
-			Public ReadOnly Property TableName() As String
-				Get
-					Return "Customer"
-				End Get
-			End Property
+            Public ReadOnly Property TableName() As String Implements IMailMergeDataSource.TableName
+                Get
+                    Return "Customer"
+                End Get
+            End Property
 
 			''' <summary>
 			''' Aspose.Words calls this method to get a value for every data field.
 			''' </summary>
-			Public Function GetValue(ByVal fieldName As String, <System.Runtime.InteropServices.Out()> ByRef fieldValue As Object) As Boolean
-				Select Case fieldName
-					Case "FullName"
-						fieldValue = Me.mCustomers(Me.mRecordIndex).FullName
-						Return True
-					Case "Address"
-						fieldValue = Me.mCustomers(Me.mRecordIndex).Address
-						Return True
-					Case "Order"
-						fieldValue = Me.mCustomers(Me.mRecordIndex).Orders
-						Return True
-					Case Else
-						' A field with this name was not found, 
-						' return false to the Aspose.Words mail merge engine.
-						fieldValue = Nothing
-						Return False
-				End Select
-			End Function
+            Public Function GetValue(ByVal fieldName As String, <System.Runtime.InteropServices.Out()> ByRef fieldValue As Object) As Boolean Implements IMailMergeDataSource.GetValue
+                Select Case fieldName
+                    Case "FullName"
+                        fieldValue = Me.mCustomers(Me.mRecordIndex).FullName
+                        Return True
+                    Case "Address"
+                        fieldValue = Me.mCustomers(Me.mRecordIndex).Address
+                        Return True
+                    Case "Order"
+                        fieldValue = Me.mCustomers(Me.mRecordIndex).Orders
+                        Return True
+                    Case Else
+                        ' A field with this name was not found, 
+                        ' return false to the Aspose.Words mail merge engine.
+                        fieldValue = Nothing
+                        Return False
+                End Select
+            End Function
 
 
 			''' <summary>
 			''' A standard implementation for moving to a next record in a collection.
 			''' </summary>
-			Public Function MoveNext() As Boolean
-				If (Not Me.IsEof) Then
-					Me.mRecordIndex += 1
-				End If
+            Public Function MoveNext() As Boolean Implements IMailMergeDataSource.MoveNext
+                If (Not Me.IsEof) Then
+                    Me.mRecordIndex += 1
+                End If
 
-				Return ((Not Me.IsEof))
-			End Function
+                Return ((Not Me.IsEof))
+            End Function
 
 			'ExStart
 			'ExId:GetChildDataSourceExample
 			'ExSummary:Shows how to get a child collection of objects by using the GetChildDataSource method in the parent class.
-			Public Function GetChildDataSource(ByVal tableName As String) As IMailMergeDataSource
-				Select Case tableName
-					' Get the child collection to merge it with the region provided with tableName variable.
-					Case "Order"
-						Return New OrderMailMergeDataSource(Me.mCustomers(Me.mRecordIndex).Orders)
-					Case Else
-						Return Nothing
-				End Select
-			End Function
+            Public Function GetChildDataSource(ByVal tableName As String) As IMailMergeDataSource Implements IMailMergeDataSource.GetChildDataSource
+                Select Case tableName
+                    ' Get the child collection to merge it with the region provided with tableName variable.
+                    Case "Order"
+                        Return New OrderMailMergeDataSource(Me.mCustomers(Me.mRecordIndex).Orders)
+                    Case Else
+                        Return Nothing
+                End Select
+            End Function
 			'ExEnd
 
 			Private ReadOnly Property IsEof() As Boolean
@@ -245,46 +245,46 @@ Namespace ApiExamples
 			''' <summary>
 			''' The name of the data source. Used by Aspose.Words only when executing mail merge with repeatable regions.
 			''' </summary>
-			Public ReadOnly Property TableName() As String
-				Get
-					Return "Order"
-				End Get
-			End Property
+            Public ReadOnly Property TableName() As String Implements IMailMergeDataSource.TableName
+                Get
+                    Return "Order"
+                End Get
+            End Property
 
 			''' <summary>
 			''' Aspose.Words calls this method to get a value for every data field.
 			''' </summary>
-			Public Function GetValue(ByVal fieldName As String, <System.Runtime.InteropServices.Out()> ByRef fieldValue As Object) As Boolean
-				Select Case fieldName
-					Case "Name"
-						fieldValue = Me.mOrders(Me.mRecordIndex).Name
-						Return True
-					Case "Quantity"
-						fieldValue = Me.mOrders(Me.mRecordIndex).Quantity
-						Return True
-					Case Else
-						' A field with this name was not found, 
-						' return false to the Aspose.Words mail merge engine.
-						fieldValue = Nothing
-						Return False
-				End Select
-			End Function
+            Public Function GetValue(ByVal fieldName As String, <System.Runtime.InteropServices.Out()> ByRef fieldValue As Object) As Boolean Implements IMailMergeDataSource.GetValue
+                Select Case fieldName
+                    Case "Name"
+                        fieldValue = Me.mOrders(Me.mRecordIndex).Name
+                        Return True
+                    Case "Quantity"
+                        fieldValue = Me.mOrders(Me.mRecordIndex).Quantity
+                        Return True
+                    Case Else
+                        ' A field with this name was not found, 
+                        ' return false to the Aspose.Words mail merge engine.
+                        fieldValue = Nothing
+                        Return False
+                End Select
+            End Function
 
 			''' <summary>
 			''' A standard implementation for moving to a next record in a collection.
 			''' </summary>
-			Public Function MoveNext() As Boolean
-				If (Not Me.IsEof) Then
-					Me.mRecordIndex += 1
-				End If
+            Public Function MoveNext() As Boolean Implements IMailMergeDataSource.MoveNext
+                If (Not Me.IsEof) Then
+                    Me.mRecordIndex += 1
+                End If
 
-				Return ((Not Me.IsEof))
-			End Function
+                Return ((Not Me.IsEof))
+            End Function
 
 			' Return null because we haven't any child elements for this sort of object.
-			Public Function GetChildDataSource(ByVal tableName As String) As IMailMergeDataSource
-				Return Nothing
-			End Function
+            Public Function GetChildDataSource(ByVal tableName As String) As IMailMergeDataSource Implements IMailMergeDataSource.GetChildDataSource
+                Return Nothing
+            End Function
 
 			Private ReadOnly Property IsEof() As Boolean
 				Get

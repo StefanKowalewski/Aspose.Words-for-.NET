@@ -347,27 +347,27 @@ Namespace ApiExamples
 			'ExEnd
 		End Sub
 
-		<Test, TestCase(True, "{{ testfield1 }}value 1{{ testfield3 }}" & Constants.vbFormFeed), TestCase(False, ChrW(&H0013).ToString() & "MERGEFIELD ""testfield1""" & ChrW(&H0014).ToString() & "«testfield1»" & ChrW(&H0015).ToString() & "value 1" & ChrW(&H0013).ToString() & "MERGEFIELD ""testfield3""" & ChrW(&H0014).ToString() & "«testfield3»" & ChrW(&H0015).ToString() & Constants.vbFormFeed)> _
-		Public Sub MustasheTemplateSyntax(ByVal restoreTags As Boolean, ByVal sectionText As String)
-			Dim doc As New Document()
-			Dim builder As New DocumentBuilder(doc)
-			builder.Write("{{ testfield1 }}")
-			builder.Write("{{ testfield2 }}")
-			builder.Write("{{ testfield3 }}")
+        <Test, TestCase(True, "{{ testfield1 }}value 1{{ testfield3 }}" & Constants.vbFormFeed), TestCase(False, ChrW(&H13) & "MERGEFIELD ""testfield1""" & ChrW(&H14) & "«testfield1»" & ChrW(&H15) & "value 1" & ChrW(&H13) & "MERGEFIELD ""testfield3""" & ChrW(&H14) & "«testfield3»" & ChrW(&H15) & Constants.vbFormFeed)> _
+        Public Sub MustasheTemplateSyntax(ByVal restoreTags As Boolean, ByVal sectionText As String)
+            Dim doc As New Document()
+            Dim builder As New DocumentBuilder(doc)
+            builder.Write("{{ testfield1 }}")
+            builder.Write("{{ testfield2 }}")
+            builder.Write("{{ testfield3 }}")
 
-			doc.MailMerge.UseNonMergeFields = True
-			doc.MailMerge.PreserveUnusedTags = restoreTags
+            doc.MailMerge.UseNonMergeFields = True
+            doc.MailMerge.PreserveUnusedTags = restoreTags
 
-			Dim table As New DataTable("Test")
-			table.Columns.Add("testfield2")
-			table.Rows.Add(New Object() { "value 1" })
+            Dim table As New DataTable("Test")
+            table.Columns.Add("testfield2")
+            table.Rows.Add(New Object() {"value 1"})
 
-			doc.MailMerge.Execute(table)
+            doc.MailMerge.Execute(table)
 
-			Dim paraText As String = DocumentHelper.GetParagraphText(doc, 0)
+            Dim paraText As String = DocumentHelper.GetParagraphText(doc, 0)
 
-			Assert.AreEqual(sectionText, paraText)
-		End Sub
+            Assert.AreEqual(sectionText, paraText)
+        End Sub
 
 		<Test> _
 		Public Sub TestMailMergeGetRegionsHierarchy()
@@ -423,9 +423,9 @@ Namespace ApiExamples
 
 		Private Class MailMergeCallbackStub
 			Implements IMailMergeCallback
-			Public Sub TagsReplaced()
-				mTagsReplacedCounter += 1
-			End Sub
+            Public Sub TagsReplaced() Implements IMailMergeCallback.TagsReplaced
+                mTagsReplacedCounter += 1
+            End Sub
 
 			Public ReadOnly Property TagsReplacedCounter() As Integer
 				Get
@@ -434,6 +434,6 @@ Namespace ApiExamples
 			End Property
 
 			Private mTagsReplacedCounter As Integer
-		End Class
+        End Class
 	End Class
 End Namespace

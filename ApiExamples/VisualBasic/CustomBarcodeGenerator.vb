@@ -73,7 +73,7 @@ Public Class CustomBarcodeGenerator
             Throw New Exception("Error! Incorrect color - " & inputColor & ".")
         End If
 
-        Return color.FromArgb(color >> 16, (color And &HFF00) >> 8, color And &HFF)
+        Return Drawing.Color.FromArgb(color >> 16, (color And &HFF00) >> 8, color And &HFF)
     End Function
 
     ''' <summary>

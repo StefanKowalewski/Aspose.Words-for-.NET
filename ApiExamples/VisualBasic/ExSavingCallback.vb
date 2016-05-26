@@ -71,10 +71,10 @@ Namespace ApiExamples
 		''' </summary>
 		Private Class CustomPageFileNamePageSavingCallback
 			Implements IPageSavingCallback
-			Public Sub PageSaving(ByVal args As PageSavingArgs)
-				' Specify name of the output file for the current page.
-				args.PageFileName = String.Format(MyDir & "Page_{0}.html", args.PageIndex)
-			End Sub
+            Public Sub PageSaving(ByVal args As PageSavingArgs) Implements IPageSavingCallback.PageSaving
+                ' Specify name of the output file for the current page.
+                args.PageFileName = String.Format(MyDir & "Page_{0}.html", args.PageIndex)
+            End Sub
 		End Class
 
 		''' <summary>
@@ -82,11 +82,11 @@ Namespace ApiExamples
 		''' </summary>
 		Private Class CustomPageStreamPageSavingCallback
 			Implements IPageSavingCallback
-			Public Sub PageSaving(ByVal args As PageSavingArgs)
-				' Specify memory stream for the current page.
-				args.PageStream = New MemoryStream()
-				args.KeepPageStreamOpen = True
-			End Sub
+            Public Sub PageSaving(ByVal args As PageSavingArgs) Implements IPageSavingCallback.PageSaving
+                ' Specify memory stream for the current page.
+                args.PageStream = New MemoryStream()
+                args.KeepPageStreamOpen = True
+            End Sub
 		End Class
 	End Class
 End Namespace
